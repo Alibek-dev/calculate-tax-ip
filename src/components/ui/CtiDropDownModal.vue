@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import {ref} from "vue";
+import CtiCloseIcon from "@/components/icons/CtiCloseIcon.vue";
+import CtiIcon from "@/components/ui/CtiIcon.vue";
 
 const isShow = ref(false)
 const backdropShow = ref(false)
@@ -41,8 +43,9 @@ defineExpose({
           <div class="flex justify-center rounded-[2px] py-3">
             <div class="bg-[#e0e0e0] w-6 h-1"></div>
           </div>
-          <div class="flex justify-between items-start">
-            <div>Заплатить налоги за ИП</div>
+          <div class="flex justify-between items-center">
+            <div class="title">Заплатить налоги за ИП</div>
+            <cti-icon @click="closeDialog" class="text-neutral-400 cursor-pointer" size="18"><cti-close-icon /></cti-icon>
           </div>
         </div>
       </transition>
