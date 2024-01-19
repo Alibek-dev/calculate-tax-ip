@@ -3,7 +3,7 @@
 </script>
 
 <template>
-  <main class="mx-4 flex justify-center items-center h-[100vh]">
+  <main class="flex justify-center items-center h-[100vh] relative">
     <router-view />
   </main>
 </template>
