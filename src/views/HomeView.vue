@@ -1,8 +1,9 @@
 <script setup lang="ts">
+import CtiButton from "@/components/ui/CtiButton.vue";
 </script>
 
 <template>
   <main>
-    <h1 class="text-red-500">Hello world</h1>
+    <cti-button secondary>Налоговый вычет</cti-button>
   </main>
 </template>
