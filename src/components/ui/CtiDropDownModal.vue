@@ -39,14 +39,15 @@ defineExpose({
         leave-active-class="duration-300"
         leave-to-class="translate-y-full"
       >
-        <div v-if="backdropShow" class="bg-white h-[100vh] mt-10 z-50 rounded-t-[30px] px-6" @click.stop>
+        <div v-if="backdropShow" class="bg-white h-full mt-10 z-50 rounded-t-[30px] px-6 overflow-y-auto pb-20" @click.stop>
           <div class="flex justify-center rounded-[2px] py-3">
             <div class="bg-[#e0e0e0] w-6 h-1"></div>
           </div>
-          <div class="flex justify-between items-center">
+          <div class="flex justify-between items-center mb-6">
             <div class="title">Заплатить налоги за ИП</div>
             <cti-icon @click="closeDialog" class="text-neutral-400 cursor-pointer" size="18"><cti-close-icon /></cti-icon>
           </div>
+          <slot></slot>
         </div>
       </transition>
     </div>
