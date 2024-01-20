@@ -1,13 +1,19 @@
 <script setup lang="ts">
 import {usePaymentTaxStore} from "@/stores/PaymentTaxStore";
 import CtiButton from "@/components/ui/CtiButton.vue";
-import {ref} from "vue";
+import {onBeforeMount, ref} from "vue";
 import SelectTaxesForPayComponent from "@/components/SelectTaxesForPayComponent.vue";
 import ResultPaidTaxesComponent from "@/components/ResultPaidTaxesComponent.vue";
+import {useRouter} from "vue-router";
 
 const paymentTaxStore = usePaymentTaxStore()
+const router = useRouter()
 
 const paid = ref(false)
+
+onBeforeMount(() => {
+  if (!paymentTaxStore.paymentTaxForm.income) router.push({ name: "home" })
+})
 
 </script>
 
