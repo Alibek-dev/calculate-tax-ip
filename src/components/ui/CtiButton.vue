@@ -14,7 +14,7 @@ defineProps({
 <template>
   <button
     type="button"
-    class="rounded-md shadow text-base italic text-center py-4 px-8 focus:ring focus:ring-gray-400 transition-colors"
+    class="rounded-md hover:shadow-2xl transition-all text-base italic text-center py-4 px-8 focus:shadow-2xl focus:ring focus:ring-gray-400"
     :class="{
       'bg-black text-white': !disabled && !secondary,
       'bg-white border-2 shadow-none text-zinc-400': disabled,
