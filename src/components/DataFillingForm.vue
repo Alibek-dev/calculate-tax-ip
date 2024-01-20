@@ -6,12 +6,14 @@ import {computed, ref} from "vue";
 import type { ComputedRef, Ref } from "vue";
 import {TaxRegimesEnum} from "@/@types/index.types";
 import type {SelectItemType} from "@/@types/select.types";
-import type {PaymentTaxForm} from "@/@types/payment-tax.types";
 import {usePaymentTaxStore} from "@/stores/PaymentTaxStore";
+import {useRouter} from "vue-router";
+import type {PaymentForm} from "@/@types/payment-tax.types";
 
 const paymentTaxStore = usePaymentTaxStore()
+const router = useRouter()
 
-const form: Ref<PaymentTaxForm> = ref({
+const form: Ref<PaymentForm> = ref({
   firstName: "",
   lastName: "",
   iin: "",
@@ -26,6 +28,7 @@ const options: ComputedRef<SelectItemType[]> = computed(() => [
 
 const submit = () => {
   paymentTaxStore.setPaymentTaxForm(form.value)
+  router.push({ name: "payment" })
 }
 </script>
 
