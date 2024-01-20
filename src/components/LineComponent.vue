@@ -19,7 +19,7 @@ defineProps({
 </script>
 
 <template>
-  <div class="flex items-end justify-between gap-12 italic" :class="{ 'text-base': textSize === 'small' }">
+  <div class="flex items-end justify-between gap-12 italic" :class="{ 'text-base': textSize === 'small', 'text-2xl': textSize === 'large' }">
     <div>{{ text }}</div>
     <div class="text-end whitespace-nowrap">{{ value }}</div>
   </div>
