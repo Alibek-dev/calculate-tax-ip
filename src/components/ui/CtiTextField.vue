@@ -74,7 +74,7 @@ const maskRule = computed(() => MaskRules[props.maskType] ?? MaskRules[MaskTypes
         :data-maska="maskRule"
         :data-maska-reversed="reversedMask"
       >
-      <div class="absolute mt-2.5 left-0 text-red-500 text-xs">{{ errorMessage }}</div>
+      <div v-if="errorMessage" class="absolute mt-2.5 left-0 text-red-500 text-xs shake-animation">{{ errorMessage }}</div>
     </div>
   </div>
 </template>

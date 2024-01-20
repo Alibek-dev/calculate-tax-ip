@@ -24,6 +24,7 @@ const form: Ref<PaymentForm> = ref({
 })
 
 const submit = async () => {
+  await v$.value.$reset()
   if (!await v$.value.$validate()) return
 
   paymentTaxStore.setPaymentTaxForm(form.value)

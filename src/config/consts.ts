@@ -8,7 +8,7 @@ export const MaskRules = {
 }
 
 export const ValidatorsMessages = {
-  required: "Обязательно поле",
+  required: "Обязательное поле",
   minCurrency: () => `Доход не может равен нулю`,
   maxCurrency: (max: number) => `Максимальное значение ${formatCurrencyUtils(max)}`,
   iin: "Введите корректный ИИН"
