@@ -30,7 +30,7 @@ defineExpose({
     leave-active-class="duration-150"
     leave-to-class="opacity-0"
   >
-    <div v-if="isShow" @click.stop="closeDialog" class="h-[100vh] w-full bg-graniteGray fixed z-10">
+    <div v-if="isShow" @click.stop="closeDialog" class="h-[100vh] w-full bg-graniteGray absolute z-10">
       <transition
         enter-from-class="translate-y-full"
         enter-active-class="duration-300 ease-in"
