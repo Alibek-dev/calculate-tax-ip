@@ -13,6 +13,7 @@ const props = defineProps({
   },
   taxSum: {
     type: Number,
+    default: 0,
   },
   checked: {
     type: Boolean,
@@ -45,7 +46,7 @@ const checked = computed({
       </div>
     </div>
 
-    <div v-if="checked && taxSum" class="flex justify-between items-center">
+    <div v-if="checked" class="flex justify-between items-center">
       <div>{{ formatCurrencyUtils(taxSum) }}</div>
       <div>
         <img src="@/assets/svg/info.svg" alt="">

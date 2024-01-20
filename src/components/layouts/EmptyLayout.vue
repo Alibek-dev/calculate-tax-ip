@@ -3,7 +3,7 @@
 </script>
 
 <template>
-  <div class="p-6">
+  <div class="p-6 h-[100vh]">
     <router-view></router-view>
   </div>
 </template>

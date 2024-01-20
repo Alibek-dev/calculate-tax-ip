@@ -2,10 +2,9 @@
 import CtiButton from "@/components/ui/CtiButton.vue";
 import CtiTextField from "@/components/ui/CtiTextField.vue";
 import CtiSelect from "@/components/ui/CtiSelect.vue";
-import {computed, ref} from "vue";
-import type { ComputedRef, Ref } from "vue";
+import {ref} from "vue";
+import type { Ref } from "vue";
 import {TaxRegimesEnum} from "@/@types/index.types";
-import type {SelectItemType} from "@/@types/select.types";
 import {usePaymentTaxStore} from "@/stores/PaymentTaxStore";
 import {useRouter} from "vue-router";
 import type {PaymentForm} from "@/@types/payment-tax.types";
@@ -20,11 +19,6 @@ const form: Ref<PaymentForm> = ref({
   taxType: TaxRegimesEnum.LITE,
   income: "",
 })
-
-const options: ComputedRef<SelectItemType[]> = computed(() => [
-  { text: "Упрощённый", value: TaxRegimesEnum.LITE },
-  { text: "Общеустановленный", value: TaxRegimesEnum.MAIN },
-])
 
 const submit = () => {
   paymentTaxStore.setPaymentTaxForm(form.value)
@@ -62,7 +56,7 @@ const submit = () => {
 
     <CtiSelect
       label="Режим налогообложения"
-      :items="options"
+      :items="paymentTaxStore.taxTypes"
       item-text="text"
       item-value="value"
       v-model="form.taxType"

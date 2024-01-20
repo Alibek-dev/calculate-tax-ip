@@ -2,7 +2,9 @@ import { defineStore } from 'pinia'
 import type {Ref} from "vue";
 import type {PaymentForm, PaymentPayloadType} from "@/@types/payment-tax.types";
 import {computed, ref} from "vue";
+import type {ComputedRef} from "vue";
 import {TaxRegimesEnum} from "@/@types/index.types";
+import type {SelectItemType} from "@/@types/select.types";
 
 export const usePaymentTaxStore = defineStore('paymentTax', () => {
   const paymentTaxForm: Ref<PaymentPayloadType> = ref({
@@ -41,10 +43,16 @@ export const usePaymentTaxStore = defineStore('paymentTax', () => {
     return sum
   }, 0))
 
+  const taxTypes: ComputedRef<SelectItemType[]> = computed(() => [
+    { text: "Упрощённый", value: TaxRegimesEnum.LITE },
+    { text: "Общеустановленный", value: TaxRegimesEnum.MAIN },
+  ])
+
   return {
     paymentTaxForm,
     taxes,
     sumAllTaxes,
+    taxTypes,
 
     setPaymentTaxForm
   }
