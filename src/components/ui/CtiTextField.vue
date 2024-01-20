@@ -30,6 +30,10 @@ const props = defineProps({
   reversedMask: {
     type: Boolean,
     default: false,
+  },
+  errorMessage: {
+    type: String,
+    default: "",
   }
 })
 
@@ -51,7 +55,14 @@ const maskRule = computed(() => MaskRules[props.maskType] ?? MaskRules[MaskTypes
   <div>
     <div v-if="label" class="mb-2.5 italic text-base">{{ label }}</div>
     
-    <div class="input-wrapper" :class="{ 'border-blue-500': focused, 'border-zinc-300': !focused }">
+    <div
+      class="input-wrapper"
+      :class="{
+        'border-blue-500': focused && !errorMessage,
+        'border-zinc-300': !focused && !errorMessage,
+        'border-red-500': errorMessage
+      }"
+    >
       <input
         type="text"
         :placeholder="placeholder"
@@ -63,13 +74,14 @@ const maskRule = computed(() => MaskRules[props.maskType] ?? MaskRules[MaskTypes
         :data-maska="maskRule"
         :data-maska-reversed="reversedMask"
       >
+      <div class="absolute mt-2.5 left-0 text-red-500 text-xs">{{ errorMessage }}</div>
     </div>
   </div>
 </template>
 
 <style scoped>
 .input-wrapper {
-  @apply rounded-[3px] border px-2.5 py-2
+  @apply rounded-[3px] border px-2.5 py-2 relative
 }
 
 input {
