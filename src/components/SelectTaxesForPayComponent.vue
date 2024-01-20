@@ -35,12 +35,6 @@ const paymentTaxStore = usePaymentTaxStore()
         v-model:checked="tax.selected"
       />
     </div>
-
-    <LineComponent
-      class="mb-8"
-      text="Итого к оплате за полугодие:"
-      :value="formatCurrencyUtils(paymentTaxStore.sumAllTaxes)"
-    />
   </div>
 </template>
 

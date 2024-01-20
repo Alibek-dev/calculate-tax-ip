@@ -5,6 +5,8 @@ import {onBeforeMount, ref} from "vue";
 import SelectTaxesForPayComponent from "@/components/SelectTaxesForPayComponent.vue";
 import ResultPaidTaxesComponent from "@/components/ResultPaidTaxesComponent.vue";
 import {useRouter} from "vue-router";
+import {formatCurrencyUtils} from "@/utrils/currency.utils";
+import LineComponent from "@/components/LineComponent.vue";
 
 const paymentTaxStore = usePaymentTaxStore()
 const router = useRouter()
@@ -22,7 +24,14 @@ onBeforeMount(() => {
     <SelectTaxesForPayComponent v-if="!paid" />
     <ResultPaidTaxesComponent v-else />
 
-    <cti-button v-if="!paid" @click="paid = true" :disabled="!paymentTaxStore.sumAllTaxes" class="w-full">Оплатить</cti-button>
+    <div v-if="!paid">
+      <LineComponent
+        class="mb-8"
+        text="Итого к оплате за полугодие:"
+        :value="formatCurrencyUtils(paymentTaxStore.sumAllTaxes)"
+      />
+      <cti-button @click="paid = true" :disabled="!paymentTaxStore.sumAllTaxes" class="w-full">Оплатить</cti-button>
+    </div>
     <router-link v-else :to="{ name: 'home' }">
       <div class="text-xl italic text-center">Вернуться на главную</div>
     </router-link>
