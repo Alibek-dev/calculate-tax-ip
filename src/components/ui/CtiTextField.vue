@@ -1,5 +1,8 @@
 <script setup lang="ts">
 import {computed, ref} from "vue";
+import type {PropType} from "vue";
+import {MaskTypes} from "@/@types/index.types";
+import {MaskRules} from "@/config/consts";
 
 const emit = defineEmits(["update:modelValue"])
 
@@ -19,6 +22,14 @@ const props = defineProps({
   maxLength: {
     type: String,
     default: 200,
+  },
+  maskType: {
+    type: String as PropType<MaskTypes>,
+    default: MaskTypes.any,
+  },
+  reversedMask: {
+    type: Boolean,
+    default: false,
   }
 })
 
@@ -32,6 +43,8 @@ const value = computed({
     emit("update:modelValue", value)
   }
 })
+
+const maskRule = computed(() => MaskRules[props.maskType] ?? MaskRules[MaskTypes.any])
 </script>
 
 <template>
@@ -46,6 +59,9 @@ const value = computed({
         @focus="focused = true"
         @blur="focused = false"
         :maxlength="maxLength"
+        v-mask
+        :data-maska="maskRule"
+        :data-maska-reversed="reversedMask"
       >
     </div>
   </div>

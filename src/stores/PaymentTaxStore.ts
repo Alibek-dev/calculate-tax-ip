@@ -5,6 +5,8 @@ import {computed, ref} from "vue";
 import type {ComputedRef} from "vue";
 import {TaxRegimesEnum} from "@/@types/index.types";
 import type {SelectItemType} from "@/@types/select.types";
+import {Mask} from "maska";
+import {MaskRules} from "@/config/consts";
 
 export const usePaymentTaxStore = defineStore('paymentTax', () => {
   const paymentTaxForm: Ref<PaymentPayloadType> = ref({
@@ -16,11 +18,12 @@ export const usePaymentTaxStore = defineStore('paymentTax', () => {
   })
 
   const setPaymentTaxForm = (form: PaymentForm) => {
-    const { firstName, iin, lastName, taxType } = form
+    const mask = new Mask({ mask: MaskRules.currency })
+    const { firstName, iin, lastName, taxType, income } = form
     paymentTaxForm.value = {
       firstName,
       iin,
-      income: Number(form.income),
+      income: Number(mask.unmasked(income)),
       lastName,
       taxType,
     }

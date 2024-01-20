@@ -2,9 +2,9 @@
 import CtiButton from "@/components/ui/CtiButton.vue";
 import CtiTextField from "@/components/ui/CtiTextField.vue";
 import CtiSelect from "@/components/ui/CtiSelect.vue";
+import type {Ref} from "vue";
 import {ref} from "vue";
-import type { Ref } from "vue";
-import {TaxRegimesEnum} from "@/@types/index.types";
+import {MaskTypes, TaxRegimesEnum} from "@/@types/index.types";
 import {usePaymentTaxStore} from "@/stores/PaymentTaxStore";
 import {useRouter} from "vue-router";
 import type {PaymentForm} from "@/@types/payment-tax.types";
@@ -49,6 +49,7 @@ const submit = () => {
 
     <CtiTextField
       v-model="form.iin"
+      :mask-type="MaskTypes.iin"
       placeholder="ИИН"
       label="ИИН"
       max-length="12"
@@ -64,9 +65,11 @@ const submit = () => {
 
     <CtiTextField
       v-model="form.income"
-      placeholder="0 Т"
+      :mask-type="MaskTypes.currency"
+      reversed-mask
+      placeholder="0 ₸"
       label="Ваш доход за пол года"
-      max-length="12"
+      max-length="13"
     />
   </div>
   <CtiButton @click="submit" class="w-full">Рассчитать</CtiButton>
