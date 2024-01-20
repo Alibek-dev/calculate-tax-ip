@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia'
 import type {Ref} from "vue";
 import type {PaymentForm, PaymentPayloadType} from "@/@types/payment-tax.types";
-import {ref} from "vue";
+import {computed, ref} from "vue";
 import {TaxRegimesEnum} from "@/@types/index.types";
 
 export const usePaymentTaxStore = defineStore('paymentTax', () => {
@@ -10,7 +10,7 @@ export const usePaymentTaxStore = defineStore('paymentTax', () => {
     lastName: "",
     iin: "",
     taxType: TaxRegimesEnum.LITE,
-    income: null,
+    income: 0,
   })
 
   const setPaymentTaxForm = (form: PaymentForm) => {
@@ -24,8 +24,27 @@ export const usePaymentTaxStore = defineStore('paymentTax', () => {
     }
   }
 
+  const taxes = ref([
+    { taxName: "ИПН", taxDescription: "(3% от дохода)", selected: true, taxSum: () => paymentTaxForm.value.income * 0.03 },
+    {
+      taxName: "СО",
+      taxDescription: "(3,5% от дохода, <br> но не меньше 5 000 ₸)",
+      selected: true,
+      taxSum: () => (paymentTaxForm.value.income * 0.035 < 5000) ? 5000 : paymentTaxForm.value.income * 0.035
+    },
+    { taxName: "ОПВ", taxDescription: "(10% от дохода)", selected: true, taxSum: () => paymentTaxForm.value.income * 0.1 },
+    { taxName: "ВОСМС", taxDescription: "(5% от дохода)", selected: false, taxSum: () => paymentTaxForm.value.income * 0.05 },
+  ])
+
+  const sumAllTaxes = computed(() => taxes.value.reduce((sum, item) => {
+    if (item.selected) return sum + item.taxSum()
+    return sum
+  }, 0))
+
   return {
     paymentTaxForm,
+    taxes,
+    sumAllTaxes,
 
     setPaymentTaxForm
   }
