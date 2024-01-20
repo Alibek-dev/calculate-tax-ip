@@ -70,6 +70,6 @@ const selectOption = (item: SelectItemType) => {
 
 <style scoped>
 .items {
-  @apply absolute bg-white border-x border-b border-zinc-300 w-full flex flex-col rounded-[3px]
+  @apply absolute z-50 bg-white border-x border-b border-zinc-300 w-full flex flex-col rounded-[3px]
 }
 </style>
